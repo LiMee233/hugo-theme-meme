@@ -31,13 +31,13 @@ body {
 }
 
 .main {
-    padding: 2em 1em 15em;
+    padding: 2em 1em 7em;
     display: block;
 }
 
 @if ($headerLayoutFlex) {
     .main {
-        padding-top: 7em;
+        padding-top: 5em;
     }
 }
 
