@@ -59,8 +59,14 @@
                         <!-- Work-around for https://github.com/gohugoio/hugo/issues/6546 -->
                         {{- $path := (urls.Parse ($category | urlize)).Path -}}
                         {{- with $.Site.GetPage (printf `/categories/%s` $path) -}}
+                            {{ $title := .LinkTitle | default $path }}
+                            {{ if eq $title "life" }}
+                                {{ $title = "生活" }}
+                            {{ else if eq $title "tech" }}
+                                {{ $title = "技术" }}
+                            {{ end }}
                             <a href="{{- .RelPermalink -}}" class="category-link p-category">
-                                {{- .LinkTitle | default $path -}}
+                                {{- $title -}}
                             </a>
                         {{- end -}}
                     {{- end -}}
