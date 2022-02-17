@@ -14,12 +14,6 @@
 <!-- Taxonomy -->
 {{- else if eq $.Kind "taxonomy" -}}
     {{- $htmlTitle = $htmlTitle | default ($.Type | title) -}}
-<!-- Taxonomy Term -->
-{{- else if eq $.Kind "term" -}}
-    {{- $taxonomyTermTitle := $htmlTitle | default $.Data.Term | default (delimit (last 1 (split (strings.TrimSuffix "/_index.md" $path) "/")) " ") -}}
-    {{- with $.Site.GetPage (printf "/%s" $.Data.Plural) -}}
-        {{- $htmlTitle = printf "%s: %s" (.Title | default (.Type | title)) $taxonomyTermTitle -}}
-    {{- end -}}
 <!-- Section -->
 {{- else if eq $.Kind "section" -}}
     {{- $htmlTitle = $htmlTitle | default (delimit (last 1 (split (strings.TrimSuffix "/_index.md" $path) "/")) " ") -}}
@@ -28,6 +22,16 @@
 {{- $htmlTitle = partial "utils/markdownify.html" (dict "$" $ "raw" $htmlTitle "isContent" false) -}}
 
 {{- $rawTitle := $htmlTitle | plainify | htmlUnescape -}}
+
+{{ if eq $rawTitle "life" }}
+    {{ $rawTitle = "生活" }}
+{{ else if eq $rawTitle "tech" }}
+    {{ $rawTitle = "技术" }}
+{{ else if eq $rawTitle "Tags" }}
+    {{ $rawTitle = "标签" }}
+{{ else if eq $rawTitle "Posts" }}
+    {{ $rawTitle = "文章" }}
+{{ end }}
 
 {{- $title := $rawTitle -}}
 {{- if ne $.Kind "home" -}}

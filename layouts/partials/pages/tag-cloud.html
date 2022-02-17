@@ -3,7 +3,11 @@
     <div class="main-inner">
         <div class="content tag-cloud">
             {{ if .Site.Params.displayListTitle }}
-                <h1 class="list-title">{{ .Title | default (.Type | title) }}</h1>
+                {{ $title := .Title | default (.Type | title) }}
+                {{ if eq $title "Tags" }}
+                    {{ $title = "标签" }}
+                {{ end }}
+                <h1 class="list-title">{{ $title }}</h1>
             {{ end }}
             {{ if ne (len $.Site.Taxonomies.tags) 0 }}
                 {{ $fontUnit := $.Site.Params.fontUnit }}

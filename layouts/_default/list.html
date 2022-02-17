@@ -14,10 +14,20 @@
                 <div class="content list-group">
                     {{ if .Site.Params.displayListTitle }}
                         {{ if (eq .Kind "section") }}
-                            <h1 class="list-title">{{ .Title | default (delimit (last 1 (split (strings.TrimSuffix "/_index.md" $path) "/")) " ") }}</h1>
+                            {{ $title := .Title | default (delimit (last 1 (split (strings.TrimSuffix "/_index.md" $path) "/")) " ") }}
+                            {{ if eq $title "Posts" }}
+                                {{ $title = "文章" }}
+                            {{ end }}
+                            <h1 class="list-title">{{ $title }}</h1>
                         {{ end }}
                         {{ if (eq .Kind "term") }}
-                            <h1 class="list-title">{{ .Title | default .Data.Term | default (delimit (last 1 (split (strings.TrimSuffix "/_index.md" $path) "/")) " ") }}</h1>
+                            {{ $title := .Title | default .Data.Term | default (delimit (last 1 (split (strings.TrimSuffix "/_index.md" $path) "/")) " ") }}
+                            {{ if eq $title "life" }}
+                                {{ $title = "生活" }}
+                            {{ else if eq $title "tech" }}
+                                {{ $title = "技术" }}
+                            {{ end }}
+                            <h1 class="list-title">{{ $title }}</h1>
                         {{ end }}
                     {{ end }}
 
