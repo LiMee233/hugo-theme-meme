@@ -1,45 +1,66 @@
+:root {
+    // 全局变量
+    --toggle-height: calc(var(--header-height) / 40); // 横线高度
+    --toggle-width: calc(var(--header-height) * 0.35); // 横线宽度
+    --toggle-spacing: calc(var(--header-height) / 10); // 横线间距
+}
+
 #nav-toggle {
     display: none;
 }
 
 .nav-toggle {
+    // 存放三个横线的容器
     display: none;
-    position: absolute;
-    top: 1em;
-    right: 1em;
-    margin-right: 1em;
+    position: absolute; //绝对位置，防止悬浮菜单打开后跑偏
+
+    // 距离顶部的距离：菜单栏整体高度 / 2 - 第二条横线距离容器顶部距离 - 横线本身高度
+    top: calc(var(--header-height) / 2 - var(--toggle-spacing) - var(--toggle-height) /2 );
+    
+    right: 0em; // 保持向右看齐
+
+    // 右侧间距
+    margin-right: calc(var(--header-height) * 0.5);
+    
     width: 1em;
     height: 1em;
     cursor: pointer;
 }
 
 .nav-toggle-inner {
-    padding: 1em;
-    display: inline-block;
+    // 用于维护三个横线空白处仍可点击，在此处设置大小
+    
+    // 宽度：横线长度
+    width: var(--toggle-width);
+
+    // 高度：最后一条横线距容器顶部距离 + 横线高度
+    height: calc(var(--toggle-spacing) * 2 + var(--toggle-height));
+    display: absolute;
 }
 
 .nav-toggle {
     span {
+        // 菜单的三个横线自身的样式
         display: block;
         position: absolute;
-        height: 0.1em;
-        width: 1em;
+        height: var(--toggle-height);
+        width: var(--toggle-width);
         background-color: var(--color-contrast-high);
         transition: all $duration;
         &:nth-child(1) {
-            top: 0.4em;
+            top: 0em;
         }
         &:nth-child(2) {
-            top: 0.7em;
+            top: var(--toggle-spacing);
         }
         &:nth-child(3) {
-            top: 1em;
+            top: calc(var(--toggle-spacing) * 2);
         }
     }
     &.open {
         span {
             &:nth-child(1) {
-                top: 75%;
+                top: calc(var(--toggle-width) / 4);
                 transform: rotate(225deg);
             }
             &:nth-child(2) {
@@ -48,7 +69,7 @@
                 transform: rotate(-135deg);
             }
             &:nth-child(3) {
-                top: 75%;
+                top: calc(var(--toggle-width) / 4);
                 transform: rotate(-45deg);
             }
         }
@@ -58,6 +79,5 @@
 .nav-curtain {
     height: 100vh;
     width: 100vw;
-    @include blur;
-    background: $headerBackground rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.5);
 }
