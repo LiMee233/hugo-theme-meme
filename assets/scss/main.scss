@@ -270,6 +270,12 @@ $baseRelURL: "{{ "" | relURL | strings.TrimSuffix "/" }}";
     $enableAnchorAutoHide: false;
 {{ end }}
 
+{{ if .Site.Params.enableTitleAutoNumbering }}
+    $enableTitleAutoNumbering: true;
+{{ else }}
+    $enableTitleAutoNumbering: false;
+{{ end }}
+
 {{ with .Site.Params.footnoteReturnLinkIcon }}
     $footnoteReturnLinkIcon: true;
 {{ else }}
