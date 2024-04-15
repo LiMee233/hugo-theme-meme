@@ -8,14 +8,16 @@
     {{ end }}
     {{ $prev := .Scratch.Get "prev" }}
     {{ $next := .Scratch.Get "next" }}
-    {{ if or $prev $next }}
+    {{ $isPrevExisted := and $prev (not (and .Site.Params.enableHiddenFeature (eq ($prev.Params.hidden) true))) }}
+    {{ $isNextExisted := and $next (not (and .Site.Params.enableHiddenFeature (eq ($next.Params.hidden) true))) }}
+    {{ if or $isPrevExisted $isNextExisted }}
         <ul class="post-nav">
-            {{ if $next }}
+            {{ if $isNextExisted }}
                 <li class="post-nav-prev">
                     <a href="{{ $next.RelPermalink }}" rel="prev">&lt; {{ (partial "utils/title.html" (dict "$" $next "title" $next.LinkTitle)).htmlTitle }}</a>
                 </li>
             {{ end }}
-            {{ if $prev }}
+            {{ if $isPrevExisted }}
                 <li class="post-nav-next">
                     <a href="{{ $prev.RelPermalink }}" rel="next">{{ (partial "utils/title.html" (dict "$" $prev "title" $prev.LinkTitle)).htmlTitle }} &gt;</a>
                 </li>
