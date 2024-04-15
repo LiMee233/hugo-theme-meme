@@ -23,13 +23,13 @@
 
 {{- $rawTitle := $htmlTitle | plainify | htmlUnescape -}}
 
-{{ if eq $rawTitle "life" }}
+{{ if eq $rawTitle "Life" | eq $rawTitle "life" }}
     {{ $rawTitle = "生活" }}
-{{ else if eq $rawTitle "tech" }}
+{{ else if eq $rawTitle "Tech" | eq $rawTitle "tech" }}
     {{ $rawTitle = "技术" }}
-{{ else if eq $rawTitle "Tags" }}
+{{ else if eq $rawTitle "Tags" | eq $rawTitle "tags" }}
     {{ $rawTitle = "标签" }}
-{{ else if eq $rawTitle "Posts" }}
+{{ else if eq $rawTitle "Posts" | eq $rawTitle "posts" }}
     {{ $rawTitle = "文章" }}
 {{ end }}
 

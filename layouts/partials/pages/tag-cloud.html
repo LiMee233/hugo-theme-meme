@@ -4,7 +4,7 @@
         <div class="content tag-cloud">
             {{ if .Site.Params.displayListTitle }}
                 {{ $title := .Title | default (.Type | title) }}
-                {{ if eq $title "Tags" }}
+                {{ if eq $title "Tags" | eq $title "tags" }}
                     {{ $title = "标签" }}
                 {{ end }}
                 <h1 class="list-title">{{ $title }}</h1>

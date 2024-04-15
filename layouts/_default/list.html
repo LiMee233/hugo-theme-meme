@@ -15,16 +15,16 @@
                     {{ if .Site.Params.displayListTitle }}
                         {{ if (eq .Kind "section") }}
                             {{ $title := .Title | default (delimit (last 1 (split (strings.TrimSuffix "/_index.md" $path) "/")) " ") }}
-                            {{ if eq $title "Posts" }}
+                            {{ if eq $title "Posts" | eq $title "posts" }}
                                 {{ $title = "文章" }}
                             {{ end }}
                             <h1 class="list-title">{{ $title }}</h1>
                         {{ end }}
                         {{ if (eq .Kind "term") }}
                             {{ $title := .Title | default .Data.Term | default (delimit (last 1 (split (strings.TrimSuffix "/_index.md" $path) "/")) " ") }}
-                            {{ if eq $title "Life" }}
+                            {{ if eq $title "Life" | eq $title "life" }}
                                 {{ $title = "生活" }}
-                            {{ else if eq $title "Tech" }}
+                            {{ else if eq $title "Tech" | eq $title "tech" }}
                                 {{ $title = "技术" }}
                             {{ end }}
                             <h1 class="list-title">{{ $title }}</h1>
