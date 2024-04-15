@@ -22,9 +22,9 @@
                         {{ end }}
                         {{ if (eq .Kind "term") }}
                             {{ $title := .Title | default .Data.Term | default (delimit (last 1 (split (strings.TrimSuffix "/_index.md" $path) "/")) " ") }}
-                            {{ if eq $title "life" }}
+                            {{ if eq $title "Life" }}
                                 {{ $title = "生活" }}
-                            {{ else if eq $title "tech" }}
+                            {{ else if eq $title "Tech" }}
                                 {{ $title = "技术" }}
                             {{ end }}
                             <h1 class="list-title">{{ $title }}</h1>
@@ -38,6 +38,9 @@
                         <!-- Archives -->
                         {{ if (eq .Section "archives") }}
                             {{ $pages := (where .Site.RegularPages "Section" "in" .Site.Params.mainSections) }}
+                            {{ if .Site.Params.enableHiddenFeature }}
+                                {{ $pages = where $pages ".Params.hidden" "ne" true }}
+                            {{ end }}
                             {{ .Scratch.Set "pages" $pages }}
                         <!-- Regular Section -->
                         {{ else }}
@@ -60,6 +63,9 @@
 
                     <!-- Start List -->
                     {{ $pages := .Scratch.Get "pages" }}
+                    {{ if .Site.Params.enableHiddenFeature }}
+                        {{ $pages = where $pages ".Params.hidden" "ne" true }}
+                    {{ end }}
                     {{ range $pages.GroupByDate "2006" }}
                         {{ $.Scratch.Delete "zodiacName" }}
                         {{ if $.Site.Params.chineseZodiac }}

@@ -4,6 +4,9 @@
         {{ if .Site.Params.enableHideInHomepage }}
             {{ $pages = where $pages ".Params.hideInHomepage" "ne" true }}
         {{ end }}
+        {{ if .Site.Params.enableHiddenFeature }}
+            {{ $pages = where $pages ".Params.hidden" "ne" true }}
+        {{ end }}
 
         {{ $paginator := .Paginate $pages }}
         {{ range $paginator.Pages }}

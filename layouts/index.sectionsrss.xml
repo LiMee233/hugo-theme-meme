@@ -6,6 +6,9 @@
 <!-- Reference: https://www.intertwingly.net/wiki/pie/Rss20AndAtom10Compared -->
 <!-- Reference: https://en.wikipedia.org/wiki/RSS -->
 {{- $pages := where .Site.RegularPages "Section" "in" .Site.Params.mainSections -}}
+{{ if .Site.Params.enableHiddenFeature }}
+    {{ $pages = where $pages ".Params.hidden" "ne" true }}
+{{ end }}
 {{- $limit := .Site.Config.Services.RSS.Limit -}}
 {{- if ge $limit 1 -}}
     {{- $pages = $pages | first $limit -}}

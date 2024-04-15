@@ -347,6 +347,11 @@ uglyURLs = false
     homeLinksDelimiter = ""
 
     ## Posts
+    enableHiddenFeature = false
+    # Note：enable `hidden` front matter
+    #      support (disabled by
+    #      default for performance concern)
+
     enableHideInHomepage = false
     # Note: enable `hideInHomepage` front
     #       matter support (disabled by

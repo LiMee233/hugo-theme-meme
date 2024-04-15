@@ -330,6 +330,10 @@ uglyURLs = false
     homeLinksDelimiter = ""
 
     ## 「文章摘要」
+    enableHiddenFeature = false
+    # 說明：激活 `hidden` front matter
+    #      的支持（性能原因默認關閉）
+
     enableHideInHomepage = false
     # 說明：激活 `hideInHomepage` front matter
     #      的支持（性能原因默認關閉）
