@@ -16,7 +16,7 @@
     {{- $htmlTitle = $htmlTitle | default ($.Type | title) -}}
 <!-- Section -->
 {{- else if eq $.Kind "section" -}}
-    {{- $htmlTitle = $htmlTitle | default (delimit (last 1 (split (strings.TrimSuffix "/_index.md" $path) "/")) " ") -}}
+    {{- $htmlTitle = $htmlTitle | default (delimit (last 1  (split (strings.TrimSuffix "/_index.md" $path) "/")) " ") -}}
 {{- end -}}
 
 {{- $htmlTitle = partial "utils/markdownify.html" (dict "$" $ "raw" $htmlTitle "isContent" false) -}}
